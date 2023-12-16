@@ -7,10 +7,12 @@
 
 import UIKit
 
+public typealias ResultClosure<T: BaseRequestProtocol> = (Result<T.Response, NetworkErrorModel>) -> Void
+
 public final class NetworkLayer {
     public static let shared = NetworkLayer()
 
-    public func send<T: BaseRequestProtocol>(_ request: T, result: @escaping (Result<T.Response, NetworkErrorModel>) -> Void){
+    public func send<T: BaseRequestProtocol>(_ request: T, result: @escaping ResultClosure<T>){
         guard var urlRequest = request.asURLRequest else { return result(.failure(NetworkErrorModel(errorType: .invalidURL))) }
         
         if let params = request.body as? Encodable {

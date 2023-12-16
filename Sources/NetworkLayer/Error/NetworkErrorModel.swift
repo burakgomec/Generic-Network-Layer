@@ -8,7 +8,7 @@
 import Foundation
 
 open class NetworkErrorModel: Error {
-    public var errorType: NetworkErrorEnum?
+    public var errorType: NetworkErrorEnum
     
     public init(errorType: NetworkErrorEnum) {
         self.errorType = errorType
